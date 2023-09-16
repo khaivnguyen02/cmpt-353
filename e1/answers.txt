@@ -1,0 +1,16 @@
+1.Where you did the same calculations with NumPy and Pandas, which did you find easier to work with? Which code do you think is easier to read?
+- In my opinion, both NumPy and Pandas are easy to read and write, the hardest part is reading the documentation and figuring out how to use built-in functions.
+- I agree that "Pandas is more friendly with its input-output formats" as the labels make us easier to work with
+- For the code base, I think they are the same - Easy and compact to read!
+
+2. What were the running times of the two pivot_months_* functions? How can you explain the difference?
+
+- Running time of pivot_months_pandas: 9.4 ms ± 171 µs per loop
+- Running time of pivot_months_loops: 301 ms ± 4.74 ms per loop
+- pivot_months_pandas are ~ 30 times faster
+- Explanation:
++ Pandas uses series objects for vectorization. Vectorization is a technique that allows operations to be performed on entire arrays of data at once, instead of looping through each element (adopted from: "https://stackoverflow.com/questions/57018511/why-is-pandas-so-madly-fast-how-to-define-such-functions" and "https://medium.com/analytics-vidhya/hey-pandas-why-you-no-fast-loop-e7226ed97322")
++ Series in Pandas is a 1D array, internally stored as a NumPy array, and NumPy array is a C-style array internally
+=> result: memory efficiency like C-Programming with Python libraries (from "Data In Python" slides)
++ In other words, Pandas uses optimized C-code (NumPy under the hood) to perform operations on data (much faster than using Python loops)
+
