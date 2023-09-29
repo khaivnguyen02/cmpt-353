@@ -1,0 +1,13 @@
+1. In the hint above, what is the result of the calculation data['timestamp']*fit.slope + fit.intercept? What is the type, and describe the values.
+
+The calculation gives us the best fit line for prediction of rating based on the date and rating of the tweet.
+
+Values are the prediction of ratings at the given date.
+
+Type: Float
+
+2. In the same hint, why does this produce a fit line on the graph? Why are the created_at values and timestamp values paired correctly to make points on the plot?
+
+- data['prediction'] = data['timestamp']*fit.slope + fit.intercept is a linear function (function of a line) with the fit.slope and fit.intercept generated using scipy.stats.linregress function.
+
+- created_at values and timestamp values paired correctly to make points on the plot since timestamp values (seconds) are generated from the created_at values (datetime objects). We need to convert created_at values to timestamp because the scipy.stats.linregress function only works on numbers, not datetime objects.
