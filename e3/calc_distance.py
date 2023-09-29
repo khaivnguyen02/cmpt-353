@@ -2,7 +2,7 @@ import sys
 import pandas as pd
 import numpy as np
 import xml.dom.minidom
-from math import cos, asin, sqrt, pi
+from pykalman import KalmanFilter
 
 def output_gpx(points, output_filename):
     """
@@ -31,13 +31,14 @@ def get_data(gpx_file_path):
    
     trkpts = gpx_dom.getElementsByTagName('trkpt')
     
-    latitudes = [float(trkpt.getAttribute('lat')) for trkpt in trkpts]
-    longtitudes = [float(trkpt.getAttribute('lon')) for trkpt in trkpts]
-    timestamps = [
-        trkpt.getElementsByTagName('time')[0].firstChild.nodeValue
-        if trkpt.getElementsByTagName('time') else np.nan
-        for trkpt in trkpts
-    ]
+    for trkpt in trkpts:
+        latitudes = [float(trkpt.getAttribute('lat')) for trkpt in trkpts]
+        longtitudes = [float(trkpt.getAttribute('lon')) for trkpt in trkpts]
+        timestamps = [
+            trkpt.getElementsByTagName('time')[0].firstChild.nodeValue
+            if trkpt.getElementsByTagName('time') else np.nan
+            for trkpt in trkpts
+            ]
         
     data = {
         'datetime': timestamps,
@@ -53,13 +54,34 @@ def get_data(gpx_file_path):
 
 # Reference: https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula/21623206
 def haversine(lat1, lon1, lat2, lon2):
-    r = 6371 
-    p = pi / 180
-    a = 0.5 - cos((lat2-lat1)*p)/2 + cos(lat1*p) * cos(lat2*p) * (1-cos((lon2-lon1)*p))/2
-    return 2 * r * asin(sqrt(a))
+    r = 6371000 # metres
+    p = np.pi / 180
+    a = 0.5 - np.cos((lat2-lat1)*p)/2 + np.cos(lat1*p) * np.cos(lat2*p) * (1-np.cos((lon2-lon1)*p))/2
+    return 2 * r * np.arcsin(np.sqrt(a))
 
 def distance(points):
-    pass
+    return haversine(points['lat'].shift(1), points['lon'].shift(1), points['lat'], points['lon']).sum()
+
+def smooth(points):
+    initial_state = points.iloc[0]
+    observation_covariance = np.diag([10**-5, 10**-5, 1, 1]) ** 2
+    transition_covariance = np.diag([10**-5, 10**-5, 0.75, 0.75]) ** 2
+    transition = [[1, 0, (5*10**-7), (33*10**-7)],
+                  [0, 1, (-48*10**-7), (9*10**-7)],
+                  [0, 0, 1, 0],
+                  [0, 0, 0, 1]]
+    
+    kf = KalmanFilter(initial_state_mean=initial_state,
+                      initial_state_covariance=observation_covariance,
+                      observation_covariance=observation_covariance,
+                      transition_covariance=transition_covariance,
+                      transition_matrices=transition)
+    
+    kalman_smoothed, _ = kf.smooth(points)
+    kalman_smoothed = pd.DataFrame(kalman_smoothed)
+    kalman_smoothed = kalman_smoothed.rename(columns={0: 'lat', 1: 'lon', 2: 'Bx', 3: 'By'})
+    
+    return kalman_smoothed
 
 def main():
     input_gpx = sys.argv[1]
@@ -70,15 +92,14 @@ def main():
     points['Bx'] = sensor_data['Bx']
     points['By'] = sensor_data['By']
 
-    print(points)
     dist = distance(points)
     print(f'Unfiltered distance: {dist:.2f}')
 
-    #smoothed_points = smooth(points)
-    #smoothed_dist = distance(smoothed_points)
-    #print(f'Filtered distance: {smoothed_dist:.2f}')
+    smoothed_points = smooth(points)
+    smoothed_dist = distance(smoothed_points)
+    print(f'Filtered distance: {smoothed_dist:.2f}')
 
-    #output_gpx(smoothed_points, 'out.gpx')
+    output_gpx(smoothed_points, 'out.gpx')
 
 
 if __name__ == '__main__':

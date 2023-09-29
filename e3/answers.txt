@@ -1,0 +1,10 @@
+1. When smoothing the CPU temperature, do you think you got a better result with LOESS or Kalman smoothing? What differences did you notice?
+- "LOESS is great if you have lots of samples" (from slides) => it's true for this data set, I think it did a great job in  smoothing the curve and filtering the noise, but sometimes it can't capture the 'real' data (when the temperature slightly change).
+- Kalman smoothing's result seems always lower than the actual data. It's designed to let us express what we know so it could be better if we know more about the data (we only know 4 in this case). => it fails to predict the 'real' spikes of the temperature, it also expected the temperature to decrease at the end (not true actually).
+=> LOESS give me a better result but Kalman could be better if we know more about the data!
+
+2. In the CSV files, you might have also noticed other data about the observations: accelerometer (acceleration in x, y, z directions), gyroscope (rate of turning, pitch, roll, yaw). How could those have been used to make a better prediction about the "next" latitude and longtitude?
+
+Accelerometer could help us calculate the changes of velocity at given times and gyroscope data could be parameters when estimating error and predicting the 'next' lat and lon.
+=> We can create better transition_covariance and transition matrix. 
+- Instead of implicity assume that the walking pace is constant, we can now take the acceleration into account

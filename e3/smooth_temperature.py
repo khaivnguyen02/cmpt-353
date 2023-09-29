@@ -25,9 +25,9 @@ initial_state = kalman_data.iloc[0]
 observation_covariance = np.diag([1, .005, 1, 100]) ** 2 # TODO: shouldn't be zero
 transition_covariance = np.diag([.25, .0001, .25, 10]) ** 2 # TODO: shouldn't be zero
 transition = [[0.98, 0.5, 0.2, -0.001],
-             [0.1, 0.4, 2.1, 0],
-             [0, 0, 0.98, 0],
-             [0, 0, 0, 1]]
+              [0.1, 0.4, 2.1, 0],
+              [0, 0, 0.98, 0],
+              [0, 0, 0, 1]]
 
 kf = KalmanFilter(initial_state_mean=initial_state,
                   initial_state_covariance=observation_covariance,
