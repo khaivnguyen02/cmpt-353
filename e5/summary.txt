@@ -1,0 +1,73 @@
+Data 1
+X Variable
+- Mean: 8.71769618641382
+- Standard Deviation: 12.09458693659896
+- Range: [-22.635877790008944, 35.23705548785129]
+Y Variable
+- Mean: 12.522874034702584
+- Standard Deviation: 6.606680770370137
+- Range: [-2.565087832693213, 27.38415261152477]
+Correlation coefficient (r): 0.9503256954375483
+Description: The data set has strong positive correlation (with r of 0.95) with different means and standard deviations
+
+Data 2
+X Variable
+- Mean: -0.7107871267159572
+- Standard Deviation: 11.424031427941332
+- Range: [-33.2711130771198, 27.6470003722073]
+Y Variable
+- Mean: -0.7489869764497991
+- Standard Deviation: 6.2265497912054695
+- Range: [-18.621803760419063, 14.14731499231748]
+Correlation coefficient (r): 0.9551531665750373
+Description: The data set has strong correlation (with r of 0.96) with approximately similar means and different standard deviations
+
+Data 3
+X Variable
+- Mean: 0.9689074904200939
+- Standard Deviation: 2.2318288211623574
+- Range: [-2.4490643296742807, 4.51888491755363]
+Y Variable
+- Mean: 8.508535236641327
+- Standard Deviation: 1.1473837107336815
+- Range: [6.641734490391763, 10.551871022804317]
+Correlation coefficient (r): 0.9819372646760661
+Description: The data set has strong correlation (r = 0.98) around x = -2, 0, 2 and 4
+
+Data 4
+X Variable
+- Mean: 49.90508614830509
+- Standard Deviation: 28.387554302031926
+- Range: [0.0, 87.3767]
+Y Variable
+- Mean: 18.553836525423726
+- Standard Deviation: 16.4756375419362
+- Range: [0.0, 44.56504]
+Correlation coefficient (r): -0.08119306735490815
+Description: The data set has weak negative correlation (r = -0.08)
+             It's actually a SFU flag :)
+
+Data 5
+X Variable
+- Mean: 49.90999357843095
+- Standard Deviation: 28.378981284825983
+- Range: [4.337892453674525, 91.0528633396976]
+Y Variable
+- Mean: 18.555524937729086
+- Standard Deviation: 16.470559057583237
+- Range: [0.0554975075811517, 49.93419703633311]
+Correlation coefficient (r): -0.08823598983058888
+Description: The data set has a weak negative correlation (r = -0.09)
+             Some lines at x = 10, 30, 50, 70, 90; with some missing points at x = 30
+
+Data 6
+X Variable
+- Mean: 7.21615517960992
+- Standard Deviation: 11.861841302343018
+- Range: [-24.33382075234097, 35.402138910929]
+Y Variable
+- Mean: 7.602215028237295
+- Standard Deviation: 11.70541274804915
+- Range: [-22.9563569970746, 36.07987403078143]
+Correlation coefficient (r): 0.9350685662094906
+Description: The data set has strong positive correlation (r = 0.94) with some outliers at x = 25
