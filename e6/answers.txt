@@ -1,0 +1,51 @@
+1. 
+In the A/B test analysis, do you feel like we're p-hacking?
+    - No, I don't feel like we're p-hacking since we're doing tests for 4 different questions,
+not keep doing analysis until finding some significant (as Bad thing #2 in slides)
+
+How comfortable are you coming to a conclusion at p < 0.05?
+    + "Did more/less users use the search feature?" p-value: 0.168
+    -> The p-value of 0.168 is greater than the typical significance level of 0.05. 
+    This suggests that there is not enough statistical evidence to conclude that there is a significant difference in the usage of the search feature by users. 
+    In other words, the data does not provide strong support for the hypothesis that more or fewer users used the search feature.
+
+    + "Did users search more/less?" p-value: 0.141
+    -> Similar to the first question,  the p-value of 0.141 is greater than the significance level of 0.05.
+    -> there is insufficient evidence to conclude that users searched more or less, as the observed difference is not statistically significant.
+
+    + "Did more/less instructors use the search feature?" p-value: 0.052
+    -> The p-value of 0.052 is close to the significance level of 0.05
+    ->  there is some evidence to suggest a difference in the usage of the search feature by instructors. 
+    However, it's important to note that the result is borderline significant, and the evidence is not very strong.
+
+    + "Did instructors search more/less?" p-value: 0.045
+    -> The p-value of 0.045 is slightly less than the significance level of 0.05.
+    -> there is some evidence to conclude that instructors searched more or less.
+    -> In this case, the evidence is statistically significant.
+
+2. If we had done T-tests between each pair of sorting implementation results, how many tests would we run? 
+If we looked for p < 0.05 in them, what would the probability be of having any false conclusions, just by chance? That's the effective p-value of the many-T-tests analysis. 
+[We could have done a Bonferroni correction when doing multiple T-tests, 
+which is a fancy way of saying “for m tests, look for significance at alpha/m”.]
+
+- We would have done 7(7-1)/2 = 21 tests.
+- For each individual T-test, significance level = 0.05
+-> there is 5% change of making a Type I error 
+-> probability of not having any false conclusions in a single test = 1 - 0.05 = 0.95
+-> probability of not having any false conclusions in all 21 tests is 0.95^21
+-> probability of at least 1 false conclusion = 1 - 0.95^21 = 0.6594
+
+3. Give a ranking of the sorting implementations by speed, including which ones could not be distinguished. 
+(i.e. which pairs could our experiment not conclude had different running times?)
+
+Raking of the sorting implementations by speed:
+1. partition_sort    0.028204
+2. qs1               0.039315
+3. qs5               0.049678
+4. qs3               0.052539
+4. qs4               0.052848
+4. qs2               0.052891
+4. merge1            0.053137
+
+-> the running times between qs4, qs3, qs2 and merge1 are very close
+-> pairs that our experiment could not conclude had different running times: (qs2, qs3), (qs2, qs4), (qs3, qs4), (merge1, qs2), (merge1, qs3), (merge1, qs4)
