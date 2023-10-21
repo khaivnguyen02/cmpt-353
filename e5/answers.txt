@@ -1,0 +1,13 @@
+1. np.sqrt got me the closest to satisfying the assumptions of a T-test.
+
+2. 
++ original T-test: There're a different number of Reddit comments posted on weekdays than on weekends.
++ transformed data T-test: There're a different square root of number of Reddit comments posted on weekdays than on weekends.
+
+3. 
+I think Fix 2 (the Central Limit Theorem) does a better job of getting an answer for the original question. Since:
+- This approach aggregates data into weekly means for weekdays and weekends
+- It's based on the Central Limit Theorem -> the transformed sample means tend to follow a normal distribution.
+However, this approach loses the granularity of daily data and may not capture variations within weeks. 
+
+4. There are more comments on weekdays.
