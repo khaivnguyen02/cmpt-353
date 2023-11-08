@@ -1,0 +1,14 @@
+1. KNeighborsClassifier with LAB colour did the best for the colour-prediction task.
+Since in LAB colour, distances make sense -> that seems quite related to the predictions and might be more useful for KNN model
+where k-nearest neightbours are considered.
+RGB is based on the the primary colors of light and is often used for display purposes.
+LAB represents colors in terms of their perceptual qualities
+HSV separates color information into components that are often more intuitive for tasks involving color manipulation.
+Depending on the nature of your dataset and the characteristics of your task, 1 color space may be more suitable than others?
+References: https://dsp.stackexchange.com/questions/2687/why-do-we-use-the-hsv-colour-space-so-often-in-vision-and-image-processing
+
+2. Yes, I feel like the models is making reasonable mistakes. 
+Weather features that we could potentially add: 
++ wind
++ humidity level
++ sunrise and sunset time

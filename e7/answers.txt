@@ -1,0 +1,9 @@
+1. Looking at your dog-rates.ipynb, do you think the residual are close enough to being normal to look at the OLS p-value?
+Can you reasonably conclude that the ratings are increasing?
+I think the residual are close enough to being normal to look at the OLS p-value.
+We can reasonably conclude that the ratings are increasing since the OLS p-value is small (2.536058725135737e-127 < 0.05) and the fit.slope > 0
+
+2. Do you think that the new "better" prediction is letting the Kalman filter do a better job capturing the true signal in the noise?
+I don't think the new "better" prediction is letting the Kalman filter do a better job capturing the true signal in the noise.
+I think it's still capturing a lot of noise since the data was collect every 10 seconds,
+and in reality, there can't be that much fluctuation in CPU temperature in just 10 seconds. 
