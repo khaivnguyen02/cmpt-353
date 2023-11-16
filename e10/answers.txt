@@ -1,0 +1,11 @@
+reddit-2 with schema
+real	0m18.594s
+
+reddit 0
+real	0m7.584s
+
+reddit-2 without schema
+real	0m24.241s
+
+reddit-2 with cache
+real	0m12.476s
