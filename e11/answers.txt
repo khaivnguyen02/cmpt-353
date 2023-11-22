@@ -1,0 +1,6 @@
+1. n your reddit_relative.py, what intermediate results did you .cache()? 
+Briefly describe what would have happened if you hadn't used .cache() anywhere. (No need to time it, unless you really want to.)
+
+
+real	1m30.134s
+real	2m24.915s
