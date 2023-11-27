@@ -1,11 +1,18 @@
-reddit-2 with schema
-real	0m18.594s
-
-reddit 0
+1. 
+(1) reddit 0
 real	0m7.584s
 
-reddit-2 without schema
+(2) reddit-2 without schema and caching
 real	0m24.241s
 
-reddit-2 with cache
+(3) reddit-2 with schema but not caching
+real	0m18.594s
+
+(4) reddit-2 with schema and caching
 real	0m12.476s
+
+2. Based on the above, it look like most of the time taken to process the reddit-2 data set is in reading the files.
+
+3. I used .cache() after performing the filtering and adding the date_hour column.
+It is beneficial since the subsequent operations (groupBy, orderBy, agg and joins) are applied multiple times on the same DataFrame
+-> Spark can reuse the cached data from memory instead of recomputing it from scratch

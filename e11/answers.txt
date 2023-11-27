@@ -1,6 +1,9 @@
-1. n your reddit_relative.py, what intermediate results did you .cache()? 
+1. In your reddit_relative.py, what intermediate results did you .cache()?
+I .cache() comments dataframe and joined_df dataframe.
 Briefly describe what would have happened if you hadn't used .cache() anywhere. (No need to time it, unless you really want to.)
+Spark will recompute the dataframes for every operations (groupBy, or join...) because of lazy evaluation
 
-
-real	1m30.134s
-real	2m24.915s
+2. How did marking DataFrames for broadcast affect the running time of the “best author” program above?
+With broadcast: real	1m30.134s
+Without broadcast: real	2m24.915s
+-> The running time decreased.
