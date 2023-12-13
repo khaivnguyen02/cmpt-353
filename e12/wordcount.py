@@ -18,7 +18,16 @@ def main(in_directory, out_directory):
     df = df.select(lower(df.exploded).alias('word'))
 
     # 3. Count the number of times each word occurs
-    df = df.groupBy('word').agg(count(df.word).alias('word'))
+    df = df.groupBy('word').agg(count(df.word).alias('count'))
+
+    # 4. Sort by decreasing count (frequent words first) and alphabetically if there's a tie
+    df = df.orderBy(['count', 'word'], ascending=[False, True])
+
+    # 5. Remove empty strings from the output
+    df = df.filter(df.word != '')
+
+    # 6. Write results as CSV files with the word in the first column, and count in the second
+    df.write.csv(out_directory, mode='overwrite')
 
 
 if __name__ == '__main__':
